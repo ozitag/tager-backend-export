@@ -14,6 +14,8 @@ class CsvProcessor
         $filePath = storage_path($filename);
 
         $f = fopen($filePath, 'w+');
+        fputs($f, chr(0xEF) . chr(0xBB) . chr(0xBF));
+
         foreach ($rows as $row) {
             fputcsv($f, $row);
         }
