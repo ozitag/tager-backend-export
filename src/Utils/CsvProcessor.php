@@ -17,7 +17,7 @@ class CsvProcessor
         fputs($f, chr(0xEF) . chr(0xBB) . chr(0xBF));
 
         foreach ($rows as $row) {
-            fputcsv($f, $row);
+            fputcsv($f, $row, ';');
         }
         fclose($f);
 
