@@ -37,6 +37,8 @@ abstract class BaseStrategy
                 foreach ($header as $param => $label) {
                     if (array_key_exists($param, $row)) {
                         $resultRow[] = $row[$param];
+                    } else {
+                        $resultRow[] = '';
                     }
                 }
                 $this->data[] = $resultRow;
