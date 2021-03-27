@@ -4,7 +4,7 @@ namespace OZiTAG\Tager\Backend\Export\Contracts;
 
 use OZiTAG\Tager\Backend\Utils\Helpers\ArrayHelper;
 
-abstract class BaseStrategy
+abstract class BaseExportStrategy
 {
     abstract function getId(): string;
 

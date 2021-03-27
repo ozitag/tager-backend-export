@@ -2,7 +2,7 @@
 
 namespace OZiTAG\Tager\Backend\Export;
 
-use OZiTAG\Tager\Backend\Export\Contracts\BaseStrategy;
+use OZiTAG\Tager\Backend\Export\Contracts\BaseExportStrategy;
 
 class TagerExport
 {
@@ -10,23 +10,23 @@ class TagerExport
 
     public static function registerStrategy(string $stategyClassName)
     {
-        /** @var BaseStrategy $strategy */
+        /** @var BaseExportStrategy $strategy */
         $strategy = new $stategyClassName;
 
-        if (is_subclass_of($stategyClassName, BaseStrategy::class) == false) {
-            throw new \Exception($stategyClassName . ' is not a subclass of BaseStrategy');
+        if (is_subclass_of($stategyClassName, BaseExportStrategy::class) == false) {
+            throw new \Exception($stategyClassName . ' is not a subclass of BaseExportStrategy');
         }
 
         self::$strategies[$strategy->getId()] = $strategy;
     }
 
-    public static function getStrategy(string $strategyId): ?BaseStrategy
+    public static function getStrategy(string $strategyId): ?BaseExportStrategy
     {
         return self::$strategies[$strategyId] ?? null;
     }
 
     /**
-     * @return BaseStrategy[]
+     * @return BaseExportStrategy[]
      */
     public static function getStrategies(): array
     {
