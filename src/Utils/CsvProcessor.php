@@ -8,10 +8,10 @@ use Ozerich\FileStorage\Storage;
 
 class CsvProcessor
 {
-    public static function saveToFile(array $rows)
+    public static function saveToFile(array $rows, string $filename)
     {
-        $filename = uniqid() . '.csv';
-        $filePath = storage_path($filename);
+        $tmpFilename = uniqid() . '.csv';
+        $filePath = storage_path($tmpFilename);
 
         $f = fopen($filePath, 'w+');
         fputs($f, chr(0xEF) . chr(0xBB) . chr(0xBF));
@@ -24,7 +24,7 @@ class CsvProcessor
         /** @var Storage $fileStorage */
         $fileStorage = App::make(Storage::class);
 
-        $file = $fileStorage->createFromLocalFile($filePath, config('tager-export.fileScenario'));
+        $file = $fileStorage->createFromLocalFile($filePath, config('tager-export.fileScenario'), $filename);
 
         @unlink($filePath);
 

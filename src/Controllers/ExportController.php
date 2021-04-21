@@ -59,9 +59,7 @@ class ExportController extends AdminCrudController
                 return $result;
             },
             'file' => function (ExportSession $exportSession) {
-                return $exportSession->file ? $exportSession->file->getShortJson(null, URL::route(
-                    'downloadExport', ['id' => $exportSession->id]
-                )) : null;
+                return $exportSession->file ? $exportSession->file->getShortJson() : null;
             },
         ], true);
     }

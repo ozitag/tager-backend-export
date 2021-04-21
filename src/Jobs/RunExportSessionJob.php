@@ -33,7 +33,7 @@ class RunExportSessionJob extends QueueJob
             $params = $model->params ? json_decode($model->params, true) : null;
 
             try {
-                $exportResult = $export->run($model->strategy, $params);
+                $exportResult = $export->run($model->strategy, $model->filename, $model->format, $params);
 
                 dispatch(new SetExportSessionStatusJob($model, ExportSessionStatus::Completed));
 
