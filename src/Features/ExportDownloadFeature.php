@@ -26,6 +26,6 @@ class ExportDownloadFeature extends Feature
             throw new NotFoundHttpException('File not found');
         }
 
-        $fileStorage->sendDownloadFileResponse($model->file, $model->file_name . '.' . $model->file->ext);
+        $fileStorage->sendDownloadFileResponse($model->file, $model->filename);
     }
 }

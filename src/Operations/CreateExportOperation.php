@@ -22,6 +22,8 @@ class CreateExportOperation extends Operation
     {
         $model = $repository->fillAndSave([
             'strategy' => $this->request->strategy,
+            'filename' => $this->request->filename,
+            'format' => $this->request->format,
             'params' => json_encode([]),
             'status' => ExportSessionStatus::Created,
             'created_at' => Carbon::now(),

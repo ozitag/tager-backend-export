@@ -15,6 +15,8 @@ use OZiTAG\Tager\Backend\Core\Models\TModel;
  * @property integer $id
  * @property string $status
  * @property string $strategy
+ * @property string $format
+ * @property string $filename
  * @property string $params
  * @property string $error
  * @property string $file_id
@@ -34,8 +36,8 @@ class ExportSession extends TModel
     protected $table = 'tager_export_sessions';
 
     protected $fillable = [
-        'status', 'strategy', 'params',
-        'message', 'file_id', 'file_name',
+        'status', 'strategy', 'format', 'filename',
+        'params', 'message', 'file_id', 'file_name',
         'created_at', 'started_at', 'completed_at'
     ];
 
