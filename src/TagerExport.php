@@ -8,6 +8,13 @@ class TagerExport
 {
     private static array $strategies = [];
 
+    private static ?string $fileScenario = null;
+
+    public static function init(string $fileScenario)
+    {
+        self::$fileScenario = $fileScenario;
+    }
+
     public static function registerStrategy(string $stategyClassName)
     {
         /** @var BaseExportStrategy $strategy */
@@ -31,5 +38,10 @@ class TagerExport
     public static function getStrategies(): array
     {
         return self::$strategies;
+    }
+
+    public static function getFileScenario(): ?string
+    {
+        return self::$fileScenario;
     }
 }
