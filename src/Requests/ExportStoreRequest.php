@@ -14,7 +14,7 @@ use OZiTAG\Tager\Backend\Validation\Rule;
  * @property string $strategy
  * @property string $filename
  * @property string $format
- * @property string $delimeter
+ * @property string $delimiter
  */
 class ExportStoreRequest extends CrudFormRequest
 {
@@ -24,7 +24,7 @@ class ExportStoreRequest extends CrudFormRequest
             'strategy' => 'required|string',
             'filename' => 'required|string',
             'format' => ['required', Rule::in(ExportFileFormat::getValues())],
-            'delimeter' => 'string',
+            'delimiter' => 'string',
         ];
     }
 }

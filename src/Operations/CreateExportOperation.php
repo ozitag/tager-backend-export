@@ -32,7 +32,7 @@ class CreateExportOperation extends Operation
         $this->run(RunExportSessionJob::class, [
             'id' => $model->id,
             'options' => [
-                'delimeter' => $this->request->delimeter
+                'delimiter' => $this->request->delimiter
             ]
         ]);
 

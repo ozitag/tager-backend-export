@@ -39,7 +39,7 @@ class Export
         }
 
         try {
-            $file = CsvProcessor::saveToFile($rows, $filename, array_key_exists('delimeter', $options) ? $options['delimeter'] : ',');
+            $file = CsvProcessor::saveToFile($rows, $filename, array_key_exists('delimiter', $options) ? $options['delimiter'] : ',');
         } catch (\Exception $exception) {
             throw new ExportSaveFileException('Save file error - ' . $exception->getMessage());
         }
