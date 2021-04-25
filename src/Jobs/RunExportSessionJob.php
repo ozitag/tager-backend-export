@@ -14,9 +14,13 @@ class RunExportSessionJob extends QueueJob
 {
     protected int $id;
 
-    public function __construct(int $id)
+    protected array $options;
+
+    public function __construct(int $id, array $options = [])
     {
         $this->id = $id;
+
+        $this->options = $options;
     }
 
     public function handle(ExportSessionRepository $exportSessionRepository, Export $export)
@@ -33,7 +37,13 @@ class RunExportSessionJob extends QueueJob
             $params = $model->params ? json_decode($model->params, true) : null;
 
             try {
-                $exportResult = $export->run($model->strategy, $model->filename, $model->format, $params);
+                $exportResult = $export->run(
+                    $model->strategy,
+                    $model->filename,
+                    $model->format,
+                    $params,
+                    $this->options
+                );
 
                 dispatch(new SetExportSessionStatusJob($model, ExportSessionStatus::Completed));
 

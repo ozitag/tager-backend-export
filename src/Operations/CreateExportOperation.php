@@ -30,7 +30,10 @@ class CreateExportOperation extends Operation
         ]);
 
         $this->run(RunExportSessionJob::class, [
-            'id' => $model->id
+            'id' => $model->id,
+            'options' => [
+                'delimeter' => $this->request->delimeter
+            ]
         ]);
 
         return $model;

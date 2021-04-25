@@ -9,7 +9,7 @@ use App\Enums\FileScenario;
 
 class CsvProcessor
 {
-    public static function saveToFile(array $rows, string $filename)
+    public static function saveToFile(array $rows, string $filename, string $delimeter)
     {
         $tmpFilename = uniqid() . '.csv';
         $filePath = storage_path($tmpFilename);
@@ -17,7 +17,7 @@ class CsvProcessor
         $f = fopen($filePath, 'w+');
         fputs($f, $bom = chr(0xEF) . chr(0xBB) . chr(0xBF));
         foreach ($rows as $row) {
-            fputcsv($f, $row, ',');
+            fputcsv($f, $row, $delimeter);
         }
         fclose($f);
 

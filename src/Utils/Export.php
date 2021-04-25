@@ -11,7 +11,7 @@ use OZiTAG\Tager\Backend\Export\TagerExport;
 
 class Export
 {
-    public function run(string $strategyId, string $filename, string $format, ?array $payload = null): ExportResult
+    public function run(string $strategyId, string $filename, string $format, ?array $payload = null, ?array $options = []): ExportResult
     {
         $strategy = TagerExport::getStrategy($strategyId);
         if (!$strategy) {
@@ -39,7 +39,7 @@ class Export
         }
 
         try {
-            $file = CsvProcessor::saveToFile($rows, $filename);
+            $file = CsvProcessor::saveToFile($rows, $filename, array_key_exists('delimeter', $options) ? $options['delimeter'] : ',');
         } catch (\Exception $exception) {
             throw new ExportSaveFileException('Save file error - ' . $exception->getMessage());
         }
