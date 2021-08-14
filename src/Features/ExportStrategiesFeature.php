@@ -18,9 +18,15 @@ class ExportStrategiesFeature extends Feature
         $data = [];
 
         foreach (TagerExport::getStrategies() as $strategy) {
+            $fields = [];
+            foreach ($strategy->conditionalFields() as $name => $conditionalField) {
+                $fields[] = $conditionalField->setName($name)->getJson();
+            }
+
             $data[] = [
                 'id' => $strategy->getId(),
-                'name' => $strategy->getName()
+                'name' => $strategy->getName(),
+                'fields' => $fields
             ];
         }
 

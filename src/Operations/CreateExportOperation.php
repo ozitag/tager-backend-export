@@ -20,11 +20,18 @@ class CreateExportOperation extends Operation
 
     public function handle(ExportSessionRepository $repository)
     {
+        $params = [];
+        if ($this->request->params) {
+            foreach ($this->request->params as $param) {
+                $params[$param['name']] = $param['value'];
+            }
+        }
+
         $model = $repository->fillAndSave([
             'strategy' => $this->request->strategy,
             'filename' => $this->request->filename,
             'format' => $this->request->format,
-            'params' => json_encode([]),
+            'params' => json_encode($params),
             'status' => ExportSessionStatus::Created,
             'created_at' => Carbon::now(),
         ]);

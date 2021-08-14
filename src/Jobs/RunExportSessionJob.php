@@ -16,11 +16,15 @@ class RunExportSessionJob extends QueueJob
 
     protected array $options;
 
-    public function __construct(int $id, array $options = [])
+    protected array $params;
+
+    public function __construct(int $id, array $options = [], array $params = [])
     {
         $this->id = $id;
 
         $this->options = $options;
+
+        $this->params = $params;
     }
 
     public function handle(ExportSessionRepository $exportSessionRepository, Export $export)

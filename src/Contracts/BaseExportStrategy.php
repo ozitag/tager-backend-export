@@ -2,6 +2,7 @@
 
 namespace OZiTAG\Tager\Backend\Export\Contracts;
 
+use OZiTAG\Tager\Backend\Fields\Base\Field;
 use OZiTAG\Tager\Backend\Utils\Helpers\ArrayHelper;
 
 abstract class BaseExportStrategy
@@ -22,11 +23,16 @@ abstract class BaseExportStrategy
 
     private array $data = [];
 
+    /** @return Field[] */
+    public function conditionalFields(): array
+    {
+        return [];
+    }
+
     public function setPayload(?array $payload = null)
     {
         $this->payload = $payload ?? [];
     }
-
 
     protected function add(array $row)
     {
