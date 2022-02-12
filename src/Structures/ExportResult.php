@@ -23,7 +23,7 @@ class ExportResult
 
     public function getFileId(): ?int
     {
-        return $this->file ? $this->file->id : null;
+        return $this->file?->id;
     }
 
     public function getFileName(): string

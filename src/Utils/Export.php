@@ -11,7 +11,12 @@ use OZiTAG\Tager\Backend\Export\TagerExport;
 
 class Export
 {
-    public function run(string $strategyId, string $filename, string $format, ?array $payload = null, ?array $options = []): ExportResult
+    /**
+     * @throws ExportProcessException
+     * @throws ExportNotFoundStrategyException
+     * @throws ExportSaveFileException
+     */
+    public function run(string $strategyId, string $filename, ExportFileFormat $format, ?array $payload = null, ?array $options = []): ExportResult
     {
         $strategy = TagerExport::getStrategy($strategyId);
         if (!$strategy) {
@@ -34,7 +39,7 @@ class Export
             throw new ExportProcessException($exception);
         }
 
-        if ($format !== ExportFileFormat::Csv) {
+        if ($format != ExportFileFormat::Csv) {
             throw new ExportSaveFileException('Only CSV export is supported now');
         }
 

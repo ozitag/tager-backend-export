@@ -2,28 +2,26 @@
 
 namespace OZiTAG\Tager\Backend\Export\Enums;
 
-use OZiTAG\Tager\Backend\Core\Enums\Enum;
-
-final class ExportSessionStatus extends Enum
+enum ExportSessionStatus: string
 {
-    const Created = 'CREATED';
-    const InProgress = 'IN_PROGRESS';
-    const Completed = 'COMPLETED';
-    const Failure = 'FAILURE';
+    case Created = 'CREATED';
+    case InProgress = 'IN_PROGRESS';
+    case Completed = 'COMPLETED';
+    case Failure = 'FAILURE';
 
-    public static function label(?string $value): string
+    public static function label(?self $value): string
     {
-        switch($value){
-            case static::Created:
+        switch ($value) {
+            case self::Created:
                 return 'Создан';
-            case static::InProgress:
+            case self::InProgress:
                 return 'В процессе';
-            case static::Completed:
+            case self::Completed:
                 return 'Завершен';
-            case static::Failure:
+            case self::Failure:
                 return 'Ошибка';
             default:
-                return parent::label($value);
+                return 'Unknown';
         }
     }
 }

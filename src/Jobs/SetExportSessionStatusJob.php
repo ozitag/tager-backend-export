@@ -13,11 +13,11 @@ class SetExportSessionStatusJob extends Job
 {
     protected ExportSession $exportSession;
 
-    protected string $status;
+    protected ExportSessionStatus $status;
 
     protected ?string $message;
 
-    public function __construct(ExportSession $exportSession, string $status, ?string $message = null)
+    public function __construct(ExportSession $exportSession, ExportSessionStatus $status, ?string $message = null)
     {
         $this->exportSession = $exportSession;
 
@@ -32,18 +32,18 @@ class SetExportSessionStatusJob extends Job
 
         if ($this->status == ExportSessionStatus::InProgress) {
             $exportSessionRepository->fillAndSave([
-                'status' => ExportSessionStatus::InProgress,
+                'status' => ExportSessionStatus::InProgress->value,
                 'started_at' => Carbon::now()
             ]);
         } else if ($this->status == ExportSessionStatus::Completed) {
             $exportSessionRepository->fillAndSave([
-                'status' => ExportSessionStatus::Completed,
+                'status' => ExportSessionStatus::Completed->value,
                 'completed_at' => Carbon::now(),
                 'message' => $this->message
             ]);
         } else if ($this->status == ExportSessionStatus::Failure) {
             $exportSessionRepository->fillAndSave([
-                'status' => ExportSessionStatus::Failure,
+                'status' => ExportSessionStatus::Failure->value,
                 'completed_at' => Carbon::now(),
                 'message' => $this->message
             ]);

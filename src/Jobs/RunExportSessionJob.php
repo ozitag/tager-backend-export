@@ -2,10 +2,10 @@
 
 namespace OZiTAG\Tager\Backend\Export\Jobs;
 
-use Carbon\Carbon;
-use OZiTAG\Tager\Backend\Core\Jobs\Job;
 use OZiTAG\Tager\Backend\Core\Jobs\QueueJob;
+use OZiTAG\Tager\Backend\Export\Enums\ExportFileFormat;
 use OZiTAG\Tager\Backend\Export\Enums\ExportSessionStatus;
+use OZiTAG\Tager\Backend\Export\Exceptions\ExportException;
 use OZiTAG\Tager\Backend\Export\Models\ExportSession;
 use OZiTAG\Tager\Backend\Export\Repositories\ExportSessionRepository;
 use OZiTAG\Tager\Backend\Export\Utils\Export;
@@ -44,7 +44,7 @@ class RunExportSessionJob extends QueueJob
                 $exportResult = $export->run(
                     $model->strategy,
                     $model->filename,
-                    $model->format,
+                    ExportFileFormat::from($model->format),
                     $params,
                     $this->options
                 );

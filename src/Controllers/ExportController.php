@@ -2,7 +2,6 @@
 
 namespace OZiTAG\Tager\Backend\Export\Controllers;
 
-use Illuminate\Support\Facades\URL;
 use OZiTAG\Tager\Backend\Crud\Actions\IndexAction;
 use OZiTAG\Tager\Backend\Crud\Actions\StoreOrUpdateAction;
 use OZiTAG\Tager\Backend\Crud\Controllers\AdminCrudController;
@@ -51,7 +50,7 @@ class ExportController extends AdminCrudController
 
                 if ($exportSession->completed_at) {
                     $result[] = [
-                        'status' => ExportSessionStatus::label($exportSession->status),
+                        'status' => ExportSessionStatus::label(ExportSessionStatus::from($exportSession->status)),
                         'datetime' => $exportSession->completed_at,
                     ];
                 }
@@ -59,7 +58,7 @@ class ExportController extends AdminCrudController
                 return $result;
             },
             'file' => function (ExportSession $exportSession) {
-                return $exportSession->file ? $exportSession->file->getShortJson() : null;
+                return $exportSession->file?->getShortJson();
             },
         ], true);
     }

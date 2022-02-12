@@ -2,10 +2,8 @@
 
 namespace OZiTAG\Tager\Backend\Export\Enums;
 
-use OZiTAG\Tager\Backend\Core\Enums\Enum;
-
-final class ExportFileFormat extends Enum
+enum ExportFileFormat: string
 {
-    const Csv = 'CSV';
-    const Xls = 'XLS';
+    case Csv = 'CSV';
+    case Xls = 'XLS';
 }
