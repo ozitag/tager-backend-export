@@ -36,21 +36,21 @@ class ExportController extends AdminCrudController
             'history' => function (ExportSession $exportSession) {
                 $result = [
                     [
-                        'status' => ExportSessionStatus::label(ExportSessionStatus::Created),
+                        'status' => ExportSessionStatus::label(ExportSessionStatus::Created->value),
                         'datetime' => $exportSession->created_at,
                     ]
                 ];
 
                 if ($exportSession->started_at) {
                     $result[] = [
-                        'status' => ExportSessionStatus::label(ExportSessionStatus::InProgress),
+                        'status' => ExportSessionStatus::label(ExportSessionStatus::InProgress->value),
                         'datetime' => $exportSession->started_at,
                     ];
                 }
 
                 if ($exportSession->completed_at) {
                     $result[] = [
-                        'status' => ExportSessionStatus::label(ExportSessionStatus::from($exportSession->status)),
+                        'status' => ExportSessionStatus::label(ExportSessionStatus::from($exportSession->status)->value),
                         'datetime' => $exportSession->completed_at,
                     ];
                 }

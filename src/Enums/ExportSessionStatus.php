@@ -9,16 +9,16 @@ enum ExportSessionStatus: string
     case Completed = 'COMPLETED';
     case Failure = 'FAILURE';
 
-    public static function label(?self $value): string
+    public static function label(?string $value): string
     {
         switch ($value) {
-            case self::Created:
+            case self::Created->value:
                 return 'Создан';
-            case self::InProgress:
+            case self::InProgress->value:
                 return 'В процессе';
-            case self::Completed:
+            case self::Completed->value:
                 return 'Завершен';
-            case self::Failure:
+            case self::Failure->value:
                 return 'Ошибка';
             default:
                 return 'Unknown';
