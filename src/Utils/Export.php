@@ -2,6 +2,7 @@
 
 namespace OZiTAG\Tager\Backend\Export\Utils;
 
+use Illuminate\Support\Facades\Log;
 use OZiTAG\Tager\Backend\Export\Enums\ExportFileFormat;
 use OZiTAG\Tager\Backend\Export\Exceptions\ExportNotFoundStrategyException;
 use OZiTAG\Tager\Backend\Export\Exceptions\ExportProcessException;

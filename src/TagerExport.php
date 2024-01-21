@@ -29,7 +29,13 @@ class TagerExport
 
     public static function getStrategy(string $strategyId): ?BaseExportStrategy
     {
-        return self::$strategies[$strategyId] ?? null;
+        $strategy = self::$strategies[$strategyId] ?? null;
+        if(!$strategy){
+            return null;
+        }
+
+        $strategy->reset();
+        return $strategy;
     }
 
     /**

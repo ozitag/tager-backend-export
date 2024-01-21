@@ -52,6 +52,10 @@ abstract class BaseExportStrategy
         }
     }
 
+    public function reset(){
+        $this->data = [];
+    }
+
     public function getData(): array
     {
         return $this->data;
