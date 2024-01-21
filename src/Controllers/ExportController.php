@@ -33,26 +33,26 @@ class ExportController extends AdminCrudController
 
         $this->setResourceFields([
             'id', 'strategy',
-            'status:enum:' . ExportSessionStatus::class,
+            'status',
             'message',
             'history' => function (ExportSession $exportSession) {
                 $result = [
                     [
-                        'status' => ExportSessionStatus::label(ExportSessionStatus::Created->value),
+                        'status' => ExportSessionStatus::Created->value,
                         'datetime' => $exportSession->created_at,
                     ]
                 ];
 
                 if ($exportSession->started_at) {
                     $result[] = [
-                        'status' => ExportSessionStatus::label(ExportSessionStatus::InProgress->value),
+                        'status' => ExportSessionStatus::InProgress,
                         'datetime' => $exportSession->started_at,
                     ];
                 }
 
                 if ($exportSession->completed_at) {
                     $result[] = [
-                        'status' => ExportSessionStatus::label(ExportSessionStatus::from($exportSession->status)->value),
+                        'status' => ExportSessionStatus::from($exportSession->status)->value,
                         'datetime' => $exportSession->completed_at,
                     ];
                 }
@@ -79,8 +79,6 @@ class ExportController extends AdminCrudController
 
                     /** @var Field $field */
                    $field = $fields[$param] ?? null;
-
-                   $label = $field ? $field->getLabel() : $param;
 
                    if(!$field){
                        $result[$param] = is_array($value) ? implode(', ', $value) : $value;
